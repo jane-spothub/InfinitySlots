@@ -1,8 +1,8 @@
 // import {type Dispatch, type SetStateAction, useRef} from "react";
-import type {PaylineResult} from "../Types/types.ts";
 import {lineColors, reelsCount, symbols, symbolsPerReel} from "./symbolsImages.ts";
 import {checkPaylines, evaluateSpin} from "./usePaylineChecker.ts";
 import {type Dispatch, type SetStateAction, useRef} from "react";
+import type {PaylineResult} from "../Types/types.ts";
 export function useCanvasDrawing({
                                      canvasWidth,
                                      canvasHeight,
@@ -21,7 +21,6 @@ export function useCanvasDrawing({
     getRandomSymbol: () => string;
     betAmount: number;
     OnSetAmountWon: Dispatch<SetStateAction<number>>;
-
 }) {
     const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
     const animationFrameRef = useRef<number | null>(null);
@@ -271,7 +270,7 @@ export function useCanvasDrawing({
         ctx.strokeStyle = color;
         ctx.lineWidth = 1;
         ctx.shadowColor = color;
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 0;
         ctx.beginPath();
 
         // Get the first point (start of line)
@@ -333,7 +332,10 @@ export function useCanvasDrawing({
                     const isWinning = results.some(res =>
                         res.positions.some(([col, row]) => col === r && row === s)
                     );
-                    if (!isWinning) drawSymbol(reels[r][s], x, y, loadedSymbolImages, false, 1);
+                    if (!isWinning) {
+                        drawSymbol(reels[r][s], x, y, loadedSymbolImages, false, 1);
+
+                    }
                 }
             }
 
@@ -371,7 +373,6 @@ export function useCanvasDrawing({
 
             drawColumnSeparators(ctx);
             drawCanvasBorder(ctx);
-            // drawCanvasBorder(ctx, 0.3, false);
         };
 
 

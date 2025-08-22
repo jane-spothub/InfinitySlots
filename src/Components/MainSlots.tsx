@@ -2,9 +2,11 @@ import {SlotsCanvas} from "./SlotsCanvas.tsx";
 import "../assets/mainslot.css";
 import {useEffect, useState} from "react";
 import settings from "../assets/img/new/settings.png";
+import CloseBtn from "../assets/img/new/close-btn.png";
 import slotLogo from "../assets/img/new/safari-logo.png";
 import {MainControls} from "./Main-Controls.tsx";
 import {useSafariFortuneSnd} from "../Hooks/UseSounds/useSafariFortuneSnd.ts";
+import {SafariFortuneDialog} from "./SafariFortuneDialog.tsx";
 
 export const MainSlots = () => {
     const [betAmount, setBetAmount] = useState<number>(100);
@@ -14,6 +16,10 @@ export const MainSlots = () => {
     const [resultPopUp, setResultPopUp] = useState<boolean>(false)
     const [isFading, setIsFading] = useState(false);
     const {playSafariSnd, playSafariLoop} = useSafariFortuneSnd(false, true)
+    const [noWinning, setNoWinning] = useState<boolean>(false);
+    const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+    const [isMuted, setIsMuted] = useState<boolean>(false);
+    const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
 
     const handleSpin = () => {
         if (spinTrigger) return;
@@ -35,6 +41,7 @@ export const MainSlots = () => {
     useEffect(() => {
         if (amountWon > 1) {
             setResultPopUp(true);
+            setNoWinning(false);
 
             if (amountWon >= 1000) {
                 playSafariSnd("ThatsMassiveSnd");
@@ -61,6 +68,9 @@ export const MainSlots = () => {
                 clearTimeout(fadeTimer);
                 clearTimeout(hideTimer);
             };
+        } else {
+            setNoWinning(true);
+
         }
     }, [amountWon, playSafariSnd]);
 
@@ -71,13 +81,32 @@ export const MainSlots = () => {
                 <div className="top-bar">
                     <img className="logo" src={slotLogo} alt="logo"/>
                     <div className="balance">{balance}</div>
-                    <img className="top-settings-icon" src={settings} alt="settings"/>
+
+                    {!isSettingsOpen ? (
+                        <img className="top-settings-icon" src={settings} alt="settings"
+                             onClick={() => setIsSettingsOpen(true)}/>
+                    ) : (
+                        <img className="top-settings-icon" src={CloseBtn} alt="settings"
+                             onClick={() => setIsSettingsOpen(false)}/>
+                    )}
+
+                    {isSettingsOpen && (
+                        <SafariFortuneDialog
+                            OnHelpOpen={setIsHelpOpen}
+                            isMuted={isMuted}
+                            onMuteToggle={setIsMuted}
+                            OnSettingsOpen={setIsSettingsOpen}/>
+                    )}
                 </div>
+
+
 
                 <SlotsCanvas
                     spinTrigger={spinTrigger}
                     betAmount={betAmount}
                     OnSetAmountWon={setAmountWon}
+                    resultPopUp={resultPopUp}
+                    noWinning={noWinning}
                 />
 
                 <MainControls spinTrigger={spinTrigger}

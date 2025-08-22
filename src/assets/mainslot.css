@@ -81,6 +81,15 @@
     animation: bounce 2s infinite;
 }
 
+.settings-overlay {
+    position: absolute;
+    top: 0;
+    display: flex;
+    float: right;
+    border: 1px solid white;
+}
+
+
 @keyframes bounce {
     0%, 100% {
         transform: translateY(0);
@@ -173,7 +182,7 @@
     gap: 2px;
 }
 
-.win-amount-container{
+.win-amount-container {
     display: flex;
     justify-content: space-around;
 
@@ -188,7 +197,7 @@
     color: rgba(255, 255, 255, 0.47);
 }
 
-.bet-win{
+.bet-win {
     display: none;
 }
 
@@ -197,13 +206,14 @@
     flex-direction: row;
     font-weight: bold;
     padding: 4px;
-    gap:10px;
+    gap: 10px;
     color: rgba(103, 255, 0, 0.44);
 }
 
-.display-amount{
+.display-amount {
     display: none;
 }
+
 .bet-short-input {
     display: flex;
     flex-direction: column;
@@ -468,7 +478,84 @@
     opacity: 0.95;
 }
 
-@media (min-width: 600px) {
+.Mines-settings-dialog-overlay{
+    position: absolute;
+
+    right:0;
+    top:4%;
+    transform: none;
+    padding: 4px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border:1px solid rgba(255, 255, 255, 0.46);
+    /*background: rgb(1, 3, 3);*/
+    background-image: linear-gradient( 177.6deg, rgb(46, 114, 1) 15.3%, rgba(1,0,62,1) 91.3% );
+    border-radius: 10px;
+}
+
+.settings-close-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dialog-header{
+    font-size: 22px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.dialog-content{
+    text-align: left;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.59);
+}
+
+.mines-Settings-dialog-controls{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+
+.mines-Settings-snd-info-control{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+
+}
+
+.mines-Settings-snd-info-control:hover{
+    background: #315264;
+    padding: 5px;
+}
+
+.game-info-snd-icon {
+    width: 26px;
+}
+
+@media (min-width: 600px){
+    .Mines-settings-dialog-overlay {
+        position: absolute;
+        padding: 4px;
+        border-radius: 10px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
     .slots-canvas {
         max-width: 1000px;
@@ -485,6 +572,7 @@
         flex-direction: row;
         gap: 10px;
     }
+
     .glow-name {
         font-size: 5.2rem;
         color: #fff;
@@ -494,6 +582,43 @@
         0 0 60px #48d2fa,
         0 0 100px #b1ebfc;
         margin: 0;
+    }
+}
+
+@media (min-width: 1000px) {
+    .Mines-settings-dialog-overlay{
+        position: absolute;
+        transform: none;
+        /*background: rgb(1, 3, 3);*/
+        padding: 4px;
+        border-radius: 10px;
+        z-index: 1000;
+        right:4%;
+        top:4%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border:1px solid rgba(255, 255, 255, 0.28);
+    }
+}
+
+/* High-res / Retina laptops (≤2560px or ≤2880px) */
+@media (max-width: 2560px) and (min-width: 1400px){
+    .Mines-settings-dialog-overlay{
+        position: absolute;
+        transform: none;
+        /*background: rgb(1, 3, 3);*/
+        padding: 4px;
+        border-radius: 10px;
+        z-index: 1000;
+        right:24%;
+        top:4%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border:1px solid rgba(255, 255, 255, 0.28);
     }
 }
 
