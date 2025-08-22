@@ -134,6 +134,18 @@ export const MainSlots = () => {
                         </div>
                     </div>
                 )}
+                {isHelpOpen && (
+                    <div className={`results-overlay ${isFading ? "fade-out" : "pop-in"}`}>
+                        <div className="results-container">
+                            <div className="container ">
+                                <h1 className="glow-name">
+                                    How to play
+                                </h1>
+                                
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
