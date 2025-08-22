@@ -1,5 +1,5 @@
 // import {type Dispatch, type SetStateAction, useRef} from "react";
-import type {PaylineResult} from "../../../InfinitySlots/src/Types/types.ts";
+import type {PaylineResult} from "../Types/types.ts";
 import {lineColors, reelsCount, symbols, symbolsPerReel} from "./symbolsImages.ts";
 import {checkPaylines, evaluateSpin} from "./usePaylineChecker.ts";
 import {type Dispatch, type SetStateAction, useRef} from "react";
